@@ -35,12 +35,13 @@ class Recipe(models.Model):
     # atualiza a data
     updated_at = models.DateTimeField(auto_now=True)
     is_published = models.BooleanField(default=False)
-    cover = models.ImageField(upload_to='media/%Y/%m/%d/')
+    cover = models.ImageField(upload_to='media/%Y/%m/%d/', blank=True, default='')
 
     # ligando tabelas
     category = models.ForeignKey(
         # se a categoria for apagada os dados não seram apagados
-        Category, on_delete=models.SET_NULL, null=True
+        Category, on_delete=models.SET_NULL, null=True,
+        blank=True, default=None,
     )
     author = models.ForeignKey(
         User, on_delete=models.SET_NULL, null=True
